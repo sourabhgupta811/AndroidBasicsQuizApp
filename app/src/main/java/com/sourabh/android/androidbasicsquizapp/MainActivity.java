@@ -25,11 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private StepperIndicator indicator;
     private List<View> pagerList = new ArrayList<>();
     private String[] questions;
     private String[] options;
-    private String[] answers;
     private LayoutInflater inflater;
     private QuizPagerAdapter adapter;
     private AlertDialog submitDialog;
@@ -41,10 +39,9 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>QuizApp</font>"));
         final ViewPager pager = findViewById(R.id.viewpager);
         inflater = LayoutInflater.from(this);
-        indicator = findViewById(R.id.indicator);
+        StepperIndicator indicator = findViewById(R.id.indicator);
         questions = getResources().getStringArray(R.array.questions);
         options = getResources().getStringArray(R.array.options);
-        answers = getResources().getStringArray(R.array.answers);
         loadQuesIntoView();
         adapter = new QuizPagerAdapter(pagerList);
         pager.setAdapter(adapter);
