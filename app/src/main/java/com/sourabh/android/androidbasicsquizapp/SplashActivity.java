@@ -10,8 +10,8 @@ import android.widget.TextView;
 import com.airbnb.lottie.LottieAnimationView;
 
 public class SplashActivity extends AppCompatActivity {
-    LottieAnimationView v;
-    TextView splashName;
+    private LottieAnimationView v;
+    private TextView splashName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

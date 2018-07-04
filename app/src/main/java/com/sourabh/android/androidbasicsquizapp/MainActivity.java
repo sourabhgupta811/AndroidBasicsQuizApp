@@ -39,13 +39,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>QuizApp</font>"));
+        final ViewPager pager = findViewById(R.id.viewpager);
         inflater = LayoutInflater.from(this);
         indicator = findViewById(R.id.indicator);
         questions = getResources().getStringArray(R.array.questions);
         options = getResources().getStringArray(R.array.options);
         answers = getResources().getStringArray(R.array.answers);
         loadQuesIntoView();
-        ViewPager pager = findViewById(R.id.viewpager);
         adapter = new QuizPagerAdapter(pagerList);
         pager.setAdapter(adapter);
         indicator.setViewPager(pager, pager.getAdapter().getCount());
@@ -101,11 +101,11 @@ public class MainActivity extends AppCompatActivity {
                 //load checkbox layout into viewpager
                 View checkBoxView;
                 checkBoxView = inflater.inflate(R.layout.check_box_pager_item, null);
-                TextView checkBoxQuesTextView = checkBoxView.findViewById(R.id.checkboxQuesTextView);
-                CheckBox checkBox1 = checkBoxView.findViewById(R.id.checkbox1);
-                CheckBox checkBox2 = checkBoxView.findViewById(R.id.checkbox2);
-                CheckBox checkBox3 = checkBoxView.findViewById(R.id.checkbox3);
-                CheckBox checkBox4 = checkBoxView.findViewById(R.id.checkbox4);
+                final TextView checkBoxQuesTextView = checkBoxView.findViewById(R.id.checkboxQuesTextView);
+                final CheckBox checkBox1 = checkBoxView.findViewById(R.id.checkbox1);
+                final CheckBox checkBox2 = checkBoxView.findViewById(R.id.checkbox2);
+                final CheckBox checkBox3 = checkBoxView.findViewById(R.id.checkbox3);
+                final CheckBox checkBox4 = checkBoxView.findViewById(R.id.checkbox4);
                 checkBoxQuesTextView.setText(questions[i]);
                 checkBox1.setText(particularQuestionOptions[0]);
                 checkBox2.setText(particularQuestionOptions[1]);
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                         //load editText layout into viewpager
                         View editTextView;
                         editTextView = inflater.inflate(R.layout.edit_text_pager_item, null);
-                        TextView editTextQuestionTextView = editTextView.findViewById(R.id.editTextQuesTextView);
+                        final TextView editTextQuestionTextView = editTextView.findViewById(R.id.editTextQuesTextView);
                         editTextQuestionTextView.setText(questions[i]);
                         pagerList.add(editTextView);
                         break;
@@ -126,9 +126,9 @@ public class MainActivity extends AppCompatActivity {
                         //load radioView layout into viewpager
                         View radioView;
                         radioView = inflater.inflate(R.layout.radio_pager_item, null);
-                        TextView radioQuesTextView = radioView.findViewById(R.id.radioQuestion);
-                        RadioButton radio1 = radioView.findViewById(R.id.radioAnswer1);
-                        RadioButton radio2 = radioView.findViewById(R.id.radioAnswer2);
+                        final TextView radioQuesTextView = radioView.findViewById(R.id.radioQuestion);
+                        final RadioButton radio1 = radioView.findViewById(R.id.radioAnswer1);
+                        final RadioButton radio2 = radioView.findViewById(R.id.radioAnswer2);
                         radioQuesTextView.setText(questions[i]);
                         radio1.setText(particularQuestionOptions[0]);
                         radio2.setText(particularQuestionOptions[1]);
@@ -138,11 +138,11 @@ public class MainActivity extends AppCompatActivity {
                         //load mcqView layout into viewpager
                         View mcqView;
                         mcqView = inflater.inflate(R.layout.mcq_pager_item, null);
-                        TextView mcqQuesTextView = mcqView.findViewById(R.id.mcqQuesTextView);
-                        RadioButton mcq1 = mcqView.findViewById(R.id.mcq1);
-                        RadioButton mcq2 = mcqView.findViewById(R.id.mcq2);
-                        RadioButton mcq3 = mcqView.findViewById(R.id.mcq3);
-                        RadioButton mcq4 = mcqView.findViewById(R.id.mcq4);
+                        final TextView mcqQuesTextView = mcqView.findViewById(R.id.mcqQuesTextView);
+                        final RadioButton mcq1 = mcqView.findViewById(R.id.mcq1);
+                        final RadioButton mcq2 = mcqView.findViewById(R.id.mcq2);
+                        final RadioButton mcq3 = mcqView.findViewById(R.id.mcq3);
+                        final RadioButton mcq4 = mcqView.findViewById(R.id.mcq4);
                         mcqQuesTextView.setText(questions[i]);
                         mcq1.setText(particularQuestionOptions[0]);
                         mcq2.setText(particularQuestionOptions[1]);
@@ -157,17 +157,17 @@ public class MainActivity extends AppCompatActivity {
 
     private String[] checkAnswers() {
         String[] userAnswer = {"-1", "-1", "-1", "-1", "-1", "-1"};
-        List<View> viewPagerList = adapter.getPagerList();
+        final List<View> viewPagerList = adapter.getPagerList();
         for (int i = 0; i < viewPagerList.size(); i++) {
-            View v = viewPagerList.get(i);
+            final View v = viewPagerList.get(i);
             switch (v.getId()) {
                 case R.id.editTextView:
-                    EditText editText = v.findViewById(R.id.editTextAnswer);
-                    String answer = editText.getText().toString();
+                    final EditText editText = v.findViewById(R.id.editTextAnswer);
+                    final String answer = editText.getText().toString();
                     userAnswer[i] = answer;
                     break;
                 case R.id.radioView:
-                    RadioGroup group = v.findViewById(R.id.radioAnswerGroup);
+                    final RadioGroup group = v.findViewById(R.id.radioAnswerGroup);
                     int checkedRadioButtonId = group.getCheckedRadioButtonId();
                     if (checkedRadioButtonId == R.id.radioAnswer1) {
                         userAnswer[i] = "1";
@@ -176,8 +176,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                     break;
                 case R.id.mcqView:
-                    RadioGroup mcqGroup = v.findViewById(R.id.mcqAnswerGroup);
-                    int checkedMcqButtonId = mcqGroup.getCheckedRadioButtonId();
+                    final RadioGroup mcqGroup = v.findViewById(R.id.mcqAnswerGroup);
+                    final int checkedMcqButtonId = mcqGroup.getCheckedRadioButtonId();
                     if (checkedMcqButtonId == R.id.mcq1) {
                         userAnswer[i] = "1";
                     } else if (checkedMcqButtonId == R.id.mcq2) {
@@ -189,10 +189,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                     break;
                 case R.id.checkBoxView:
-                    CheckBox box1 = v.findViewById(R.id.checkbox1);
-                    CheckBox box2 = v.findViewById(R.id.checkbox2);
-                    CheckBox box3 = v.findViewById(R.id.checkbox3);
-                    CheckBox box4 = v.findViewById(R.id.checkbox4);
+                    final CheckBox box1 = v.findViewById(R.id.checkbox1);
+                    final CheckBox box2 = v.findViewById(R.id.checkbox2);
+                    final CheckBox box3 = v.findViewById(R.id.checkbox3);
+                    final CheckBox box4 = v.findViewById(R.id.checkbox4);
                     String checkBoxAnswer = "";
                     //keep appending all selected options in a string
                     if (box1.isChecked()) {

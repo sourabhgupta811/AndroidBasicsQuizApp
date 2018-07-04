@@ -22,16 +22,16 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         LayoutInflater inflater = LayoutInflater.from(this);
-        View toastLayout = inflater.inflate(R.layout.toast_layout, null);
+        final View toastLayout = inflater.inflate(R.layout.toast_layout, null);
         final TextView toastTextView = toastLayout.findViewById(R.id.toastAnswerTextView);
         final TextView userAnswerCountTitle = findViewById(R.id.userAnswerCountTitle);
         final TextView userAnswerCountTextView = findViewById(R.id.userAnswerCount);
+        final int userAnswerCount = getIntent().getIntExtra("userAnswerCount", 0);
+        final ListViewAdapter adapter = new ListViewAdapter(this);
         userAnswerCountTextView.setTranslationY(-1000);
         userAnswerCountTitle.setTranslationY(-1000);
         ListView listView = findViewById(R.id.listView);
-        int userAnswerCount = getIntent().getIntExtra("userAnswerCount", 0);
         userAnswerCountTextView.setText(String.valueOf(userAnswerCount) + " / 6");
-        ListViewAdapter adapter = new ListViewAdapter(this);
         listView.setAdapter(adapter);
         //show textViewScore answer after below toast has disappeared
         new Handler().postDelayed(new Runnable() {
