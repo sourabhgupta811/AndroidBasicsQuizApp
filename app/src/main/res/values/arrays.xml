@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="questions">
+        <item>
+            Which company developed android?
+        </item>
+        <item>
+            Which company bought android?
+        </item>
+        <item>
+            Web browser available in android is based on
+        </item>
+        <item>
+            Is Android available in ROM?
+        </item>
+        <item>
+            In which intent sender specifies type of receiver?
+        </item>
+        <item>
+             Which of these are versions of Android OS?
+        </item>
+    </string-array>
+    <string-array name = "options">
+        <item>
+            Apple*Google*Android Inc.*Nokia
+        </item>
+        <item>
+            Apple*No company*Nokia*Google
+        </item>
+        <item>
+            Chrome*Firefox*Open-source Webkit*Opera
+        </item>
+        <item>
+            Yes*No
+        </item>
+        <item>
+            EditText Ques
+        </item>
+        <item>
+            Oreo*Nougat*Chocolate*Marshmallow
+        </item>
+    </string-array>
+    <string-array name="answers">
+        <item>
+            3
+        </item>
+        <item>
+            4
+        </item>
+        <item>
+            3
+        </item>
+        <item>
+            2
+        </item>
+        <item>
+            implicit intent
+        </item>
+        <item>
+            1,2,4,
+        </item>
+    </string-array>
+    <string-array name="answers_in_strings">
+        <item>
+            Android Inc.
+        </item>
+        <item>
+            Google
+        </item>
+        <item>
+            Open-source Webkit
+        </item>
+        <item>
+            No
+        </item>
+        <item>
+            implicit intent
+        </item>
+        <item>
+            Oreo, Nougat, Marshmallow
+        </item>
+    </string-array>
+</resources>
