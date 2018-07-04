@@ -20,7 +20,7 @@
              Which of these are versions of Android OS?
         </item>
     </string-array>
-    <string-array name = "options">
+    <string-array name="options">
         <item>
             Apple*Google*Android Inc.*Nokia
         </item>

@@ -12,8 +12,9 @@ import com.sourabh.android.androidbasicsquizapp.R;
 import java.util.List;
 
 public class QuizPagerAdapter extends PagerAdapter {
-    List<View> pagerList;
-    public QuizPagerAdapter(List<View> pagerList){
+    private List<View> pagerList;
+
+    public QuizPagerAdapter(List<View> pagerList) {
         this.pagerList = pagerList;
     }
 
@@ -34,14 +35,12 @@ public class QuizPagerAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        LayoutInflater inflater = LayoutInflater.from(container.getContext());
         container.addView(pagerList.get(position));
         return pagerList.get(position);
     }
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-//        super.destroyItem(container, position, object);
         container.removeView(pagerList.get(position));
     }
 }

@@ -11,13 +11,12 @@ import android.widget.TextView;
 
 import com.sourabh.android.androidbasicsquizapp.R;
 
-import java.util.List;
-
 public class ListViewAdapter extends ArrayAdapter<String> {
-    Context mContext;
-    LayoutInflater mInflater;
-    String[] questions;
-    String[] answers;
+    private Context mContext;
+    private LayoutInflater mInflater;
+    private String[] questions;
+    private String[] answers;
+
     public ListViewAdapter(@NonNull Context context) {
         super(context, 0);
         this.mContext = context;
@@ -30,8 +29,8 @@ public class ListViewAdapter extends ArrayAdapter<String> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View v = convertView;
-        if(convertView == null){
-            v = mInflater.inflate(R.layout.listview_item,parent,false);
+        if (convertView == null) {
+            v = mInflater.inflate(R.layout.listview_item, parent, false);
         }
         TextView quesTextView = v.findViewById(R.id.resultPageListQues);
         TextView answerTextView = v.findViewById(R.id.resultPageListAnswer);

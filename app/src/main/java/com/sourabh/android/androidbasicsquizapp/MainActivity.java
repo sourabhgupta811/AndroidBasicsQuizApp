@@ -17,20 +17,23 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
 import com.badoualy.stepperindicator.StepperIndicator;
 import com.sourabh.android.androidbasicsquizapp.adapter.QuizPagerAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    StepperIndicator indicator;
-    List<View> pagerList = new ArrayList<>();
-    String[] questions;
-    String[] options;
-    String[] answers;
-    LayoutInflater inflater;
-    QuizPagerAdapter adapter;
-    AlertDialog submitDialog;
+    private StepperIndicator indicator;
+    private List<View> pagerList = new ArrayList<>();
+    private String[] questions;
+    private String[] options;
+    private String[] answers;
+    private LayoutInflater inflater;
+    private QuizPagerAdapter adapter;
+    private AlertDialog submitDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,19 +49,21 @@ public class MainActivity extends AppCompatActivity {
         adapter = new QuizPagerAdapter(pagerList);
         pager.setAdapter(adapter);
         indicator.setViewPager(pager, pager.getAdapter().getCount());
+        //show this dialog when submitting answers
         submitDialog = new AlertDialog.Builder(this)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String[] userAnswer = checkAnswers();
                         String[] correctAnswer = getResources().getStringArray(R.array.answers);
+                        //count for correct answers
                         int count = 0;
-                        for(int i=0;i<userAnswer.length;i++){
-                            if(userAnswer[i].equals(correctAnswer[i]))
-                            count++;
+                        for (int i = 0; i < userAnswer.length; i++) {
+                            if (userAnswer[i].equals(correctAnswer[i]))
+                                count++;
                         }
-                        Intent intent = new Intent(MainActivity.this,ResultActivity.class);
-                        intent.putExtra("userAnswerCount",count);
+                        Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+                        intent.putExtra("userAnswerCount", count);
                         startActivity(intent);
                         finish();
                     }
@@ -76,22 +81,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu,menu);
+        inflater.inflate(R.menu.main_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.submit){
+        if (item.getItemId() == R.id.submit) {
             submitDialog.show();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
-    private void loadQuesIntoView(){
-        for(int i=0;i<options.length;i++){
+
+    private void loadQuesIntoView() {
+        for (int i = 0; i < options.length; i++) {
             String[] particularQuestionOptions = options[i].split("\\*");
-            if(i==5){
+            if (i == 5) {
+                //load checkbox layout into viewpager
                 View checkBoxView;
                 checkBoxView = inflater.inflate(R.layout.check_box_pager_item, null);
                 TextView checkBoxQuesTextView = checkBoxView.findViewById(R.id.checkboxQuesTextView);
@@ -105,10 +112,10 @@ public class MainActivity extends AppCompatActivity {
                 checkBox3.setText(particularQuestionOptions[2]);
                 checkBox4.setText(particularQuestionOptions[3]);
                 pagerList.add(checkBoxView);
-            }
-            else {
+            } else {
                 switch (particularQuestionOptions.length) {
                     case 1:
+                        //load editText layout into viewpager
                         View editTextView;
                         editTextView = inflater.inflate(R.layout.edit_text_pager_item, null);
                         TextView editTextQuestionTextView = editTextView.findViewById(R.id.editTextQuesTextView);
@@ -116,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                         pagerList.add(editTextView);
                         break;
                     case 2:
+                        //load radioView layout into viewpager
                         View radioView;
                         radioView = inflater.inflate(R.layout.radio_pager_item, null);
                         TextView radioQuesTextView = radioView.findViewById(R.id.radioQuestion);
@@ -127,13 +135,14 @@ public class MainActivity extends AppCompatActivity {
                         pagerList.add(radioView);
                         break;
                     case 4:
+                        //load mcqView layout into viewpager
                         View mcqView;
                         mcqView = inflater.inflate(R.layout.mcq_pager_item, null);
                         TextView mcqQuesTextView = mcqView.findViewById(R.id.mcqQuesTextView);
-                        RadioButton mcq1= mcqView.findViewById(R.id.mcq1);
-                        RadioButton mcq2= mcqView.findViewById(R.id.mcq2);
-                        RadioButton mcq3= mcqView.findViewById(R.id.mcq3);
-                        RadioButton mcq4= mcqView.findViewById(R.id.mcq4);
+                        RadioButton mcq1 = mcqView.findViewById(R.id.mcq1);
+                        RadioButton mcq2 = mcqView.findViewById(R.id.mcq2);
+                        RadioButton mcq3 = mcqView.findViewById(R.id.mcq3);
+                        RadioButton mcq4 = mcqView.findViewById(R.id.mcq4);
                         mcqQuesTextView.setText(questions[i]);
                         mcq1.setText(particularQuestionOptions[0]);
                         mcq2.setText(particularQuestionOptions[1]);
@@ -145,12 +154,13 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    private String[] checkAnswers(){
-        String[] userAnswer = {"-1","-1","-1","-1","-1","-1"};
+
+    private String[] checkAnswers() {
+        String[] userAnswer = {"-1", "-1", "-1", "-1", "-1", "-1"};
         List<View> viewPagerList = adapter.getPagerList();
-        for(int i=0;i<viewPagerList.size();i++){
+        for (int i = 0; i < viewPagerList.size(); i++) {
             View v = viewPagerList.get(i);
-            switch(v.getId()){
+            switch (v.getId()) {
                 case R.id.editTextView:
                     EditText editText = v.findViewById(R.id.editTextAnswer);
                     String answer = editText.getText().toString();
@@ -159,26 +169,22 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.radioView:
                     RadioGroup group = v.findViewById(R.id.radioAnswerGroup);
                     int checkedRadioButtonId = group.getCheckedRadioButtonId();
-                    if(checkedRadioButtonId == R.id.radioAnswer1){
+                    if (checkedRadioButtonId == R.id.radioAnswer1) {
                         userAnswer[i] = "1";
-                    }
-                    else if(checkedRadioButtonId == R.id.radioAnswer2){
+                    } else if (checkedRadioButtonId == R.id.radioAnswer2) {
                         userAnswer[i] = "2";
                     }
                     break;
                 case R.id.mcqView:
                     RadioGroup mcqGroup = v.findViewById(R.id.mcqAnswerGroup);
                     int checkedMcqButtonId = mcqGroup.getCheckedRadioButtonId();
-                    if(checkedMcqButtonId == R.id.mcq1){
+                    if (checkedMcqButtonId == R.id.mcq1) {
                         userAnswer[i] = "1";
-                    }
-                    else if(checkedMcqButtonId == R.id.mcq2){
+                    } else if (checkedMcqButtonId == R.id.mcq2) {
                         userAnswer[i] = "2";
-                    }
-                    else if(checkedMcqButtonId == R.id.mcq3){
+                    } else if (checkedMcqButtonId == R.id.mcq3) {
                         userAnswer[i] = "3";
-                    }
-                    else if(checkedMcqButtonId == R.id.mcq4){
+                    } else if (checkedMcqButtonId == R.id.mcq4) {
                         userAnswer[i] = "4";
                     }
                     break;
@@ -188,16 +194,17 @@ public class MainActivity extends AppCompatActivity {
                     CheckBox box3 = v.findViewById(R.id.checkbox3);
                     CheckBox box4 = v.findViewById(R.id.checkbox4);
                     String checkBoxAnswer = "";
-                    if(box1.isChecked()){
+                    //keep appending all selected options in a string
+                    if (box1.isChecked()) {
                         checkBoxAnswer = "1,";
                     }
-                    if(box2.isChecked()){
+                    if (box2.isChecked()) {
                         checkBoxAnswer = checkBoxAnswer + "2,";
                     }
-                    if(box3.isChecked()){
+                    if (box3.isChecked()) {
                         checkBoxAnswer = checkBoxAnswer + "3,";
                     }
-                    if(box4.isChecked()){
+                    if (box4.isChecked()) {
                         checkBoxAnswer = checkBoxAnswer + "4,";
                     }
                     userAnswer[i] = checkBoxAnswer;

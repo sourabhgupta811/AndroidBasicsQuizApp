@@ -34,7 +34,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:stpi_stepCount="5"
         app:stpi_circleColor="#496bab"
-        app:stpi_indicatorColor="#385a9a"/>
+        app:stpi_indicatorColor="#385a9a"
+        app:stpi_stepCount="5" />
 </android.support.constraint.ConstraintLayout>

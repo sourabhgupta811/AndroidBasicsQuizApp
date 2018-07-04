@@ -7,6 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">sans-serif-light</item>
     </style>
+
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#496bab</item>
@@ -14,7 +15,8 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">sans-serif-light</item>
     </style>
+
     <style name="startButton" parent="Widget.AppCompat.Button.Borderless">
         <!-- Customize your theme here. -->
-        </style>
+    </style>
 </resources>

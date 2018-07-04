@@ -12,6 +12,7 @@ import com.airbnb.lottie.LottieAnimationView;
 public class SplashActivity extends AppCompatActivity {
     LottieAnimationView v;
     TextView splashName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +20,8 @@ public class SplashActivity extends AppCompatActivity {
         v = findViewById(R.id.lottie_view);
         splashName = findViewById(R.id.splashName);
     }
-    private void setDefaultState(){
+
+    private void setDefaultState() {
         splashName.setTranslationY(500);
         v.setScaleX(0);
         v.setScaleY(0);
@@ -38,10 +40,10 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashActivity.this,MainActivity.class);
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(intent);
                 v.cancelAnimation();
             }
-        },3000);
+        }, 3000);
     }
 }
